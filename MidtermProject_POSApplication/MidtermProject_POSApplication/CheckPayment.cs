@@ -8,16 +8,17 @@ namespace MidtermProject_POSApplication
     {
         public string CheckNumber { get; set; }
 
-        public string GetCheckNumber()
+        public void GetPaymentInformation()
         {
             Console.Write("Check number: ");
             string checkNumber = Console.ReadLine();
             CheckNumber = checkNumber;
-            return CheckNumber;
-
         }
 
+        public void PrintReceiptInfo()
+        {
+            Console.WriteLine("Payment Method: Check");
+            Console.WriteLine($"Check Number: {CheckNumber}");
+        }
     }
-
-
 }

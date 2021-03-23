@@ -4,12 +4,13 @@ using System.Text;
 
 namespace MidtermProject_POSApplication
 {
-    class CreditCardPayment : IPayment 
+    public class CreditCardPayment : IPayment
     {
         public string CardNumber { get; set; }
         public string LastFourDigits { get; set; }
         public string ExpirationDate { get; set; }
         public string CVV { get; set; }
+
 
         public string GetCardNumber()
         {
@@ -17,28 +18,19 @@ namespace MidtermProject_POSApplication
             string cardnumber = Console.ReadLine();
             CardNumber = cardnumber;
             return CardNumber;
-
         }
 
-        public string ObscureCCNumber(string cardnumber)
+        public void ObscureCCNumber(string cardNumber)
         {
-            string lastFourDigits = $"XXXX XXXX XXXX {cardnumber.Substring(cardnumber.Length - 4)}";
+            string lastFourDigits = $"XXXX XXXX XXXX {cardNumber.Substring(cardNumber.Length - 4)}";
             LastFourDigits = lastFourDigits;
-            return LastFourDigits;
         }
 
         public string GetExpDate()
         {
-            Console.Write("Expiration month: ");
-            string expirationMonth = Console.ReadLine();
-            int expMonth = Int32.Parse(expirationMonth);
-
-            Console.Write("Expiration year: ");
-            string expirationYear = Console.ReadLine();
-            int expYear = Int32.Parse(expirationYear);
-
-            string expirationdate = $"{expMonth}/{expYear}";
-            ExpirationDate = expirationdate;
+            Console.Write("Expiration date: ");
+            string expirationDate = Console.ReadLine();
+            ExpirationDate = expirationDate;
             return ExpirationDate;
         }
 
@@ -48,6 +40,24 @@ namespace MidtermProject_POSApplication
             string inputCVV = Console.ReadLine();
             CVV = inputCVV;
             return CVV;
+        }
+
+        public void GetPaymentInformation()
+        {
+            var payment = new CreditCardPayment();
+            string cardNumber = payment.GetCardNumber();
+            CardNumber = cardNumber;
+            payment.GetExpDate();
+            payment.GetCVV();
+            string lastFourDigits = $"XXXX XXXX XXXX {cardNumber.Substring(cardNumber.Length - 4)}";
+            LastFourDigits = lastFourDigits;
+        }
+
+        public void PrintReceiptInfo()
+        {
+            Console.WriteLine("Payment Type: Credit Card");
+            Console.WriteLine($"Card Number: {LastFourDigits}");
+            Console.WriteLine("Card Payment : APPROVED");
         }
     }
 }
